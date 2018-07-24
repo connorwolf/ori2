@@ -3,6 +3,8 @@ import * as Discord from 'discord.js';
 import TaskManager from './lib/TaskManager';
 import Util from "../app/lib/Util";
 import { EventHandler } from "./lib/EventHandler";
+import { CommandHandler } from "./lib/CommandHandler";
+import PluginManager from "./lib/PluginManager";
 
 interface IBotConfig {
 	defaults: {
@@ -22,19 +24,31 @@ export class Nexus {
     public cache: Discord.Collection<string, any>;
     public eventHandlers: Map<EventHandler["eventName"], EventHandler>;
     public TaskManager: TaskManager;
+    public CommandHandler: CommandHandler;
+    public PluginManager: PluginManager;
+
+    public startedOn: number;
 
 	constructor(config: IBotConfig) {
         this.config = config;
         this.client = new Discord.Client();
         this.cache = new Discord.Collection();
-        this.TaskManager = new TaskManager(this);
         this.eventHandlers = new Map();
+
+        this.TaskManager = new TaskManager(this);
+        this.CommandHandler = new CommandHandler(this);
+        this.PluginManager = new PluginManager(this);
+
+        this.startedOn = Date.now();
+
 	}
 
 	public async start() {
         await this.setupDb();
         await this.setupClient();
         await this.TaskManager.startAllTasks();
+        await this.CommandHandler.start();
+        await this.PluginManager.loadCore();
 	}
 
 	private async setupDb() {

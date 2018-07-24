@@ -18,6 +18,7 @@ class TaskManager {
 
     async startAllTasks() {
         Util.log("STARTUP", 'TaskManager initialised.');
+        // require('../lib/Prototypes.js');
         this.tasks.map(async task => { 
             Util.log("TASKMGR", `starting task ${task.options.name}`);
             await task.start(this.bot)

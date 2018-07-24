@@ -1,3 +1,4 @@
+import * as Progress from 'progress';
 import Util from '../lib/Util';
 import ClientEvents from '../lib/ClientEvents';
 import { Nexus } from '../NexusBot';
@@ -26,6 +27,8 @@ class SetupEventHandlers extends BaseTask {
         });
         this.callback = async function () {
             Util.log("SETUPEVENTHANDLERS", `applying handlers to ${ClientEvents.length} events...`);
+            let bar = new Progress('Applying handlers [:bar] :percent', ClientEvents.length);
+            
             await ClientEvents.map((event, i) => {
                 bot.eventHandlers.set(
                     event,
@@ -37,7 +40,7 @@ class SetupEventHandlers extends BaseTask {
                     handler ? handler.addHandler(new SubHandler(handler, 'auto', fn.function)) : Error('No event for default event function found!');
                 });
 
-                Util.log(`SETUPEVENTHANDLERS`, `${`[${i + 1}/${ClientEvents.length}]`.yellow}  ✅   applied handler for ${event.green}`);
+                bar.tick();
             });
             Util.log("SETUPEVENTHANDLERS", "done.");
         }
