@@ -1,18 +1,21 @@
-import { Command, CommandSyntax } from "../../lib/CommandHandler";
+const CommandUtil = require("../../lib/CommandUtil"),
+	Util = require("../../lib/Util");
 
-const plugins = new Command(
+const verify = new CommandUtil.Command(
 	{
 		name: "verify",
 		description: "verify command for Nibel",
 		global: true,
-		syntax: new CommandSyntax("")
+		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m) {
 		if (m.channel.id != "") return;
 		m.member.addRole("• Member").then(() => {
 			m.guild.channels.get();
+		}, (err) => {
+			Util.log(err);
 		});
 	}
 );
 
-export default plugins;
+module.exports = verify;

@@ -1,13 +1,13 @@
 // import Util from '../lib/Util';
 
-export class SubHandler {
+class SubHandler {
 	constructor(parent, name, handler) {
 		this.handle = handler;
 		this.name = name;
 	}
 }
 
-export class EventHandler {
+class EventHandler {
 
 	constructor(bot, eventName, defaultFunction) {
 		this.bot = bot;
@@ -31,3 +31,8 @@ export class EventHandler {
 		this.subHandlers.delete(handler.name);
 	}
 }
+
+module.exports = {
+	SubHandler,
+	EventHandler
+};

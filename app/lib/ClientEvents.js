@@ -48,4 +48,4 @@ const ClientEvents = [
 	"warn"
 ];
 
-export default ClientEvents;
+module.exports = ClientEvents;

@@ -1,11 +1,12 @@
-import * as Mongoose from "mongoose";
-import * as Discord from "discord.js";
-import TaskManager from "./lib/TaskManager";
-import Util from "./lib/Util";
-import { CommandHandler } from "./lib/CommandHandler";
-import PluginManager from "./lib/PluginManager";
+const Discord = require("discord.js"),
+	Mongoose = require("mongoose");
 
-export class Nexus {
+const TaskManager = require("./lib/TaskManager"),
+	Util = require("./lib/Util"),
+	CommandUtil = require("./lib/CommandUtil"),
+	PluginManager = require("./lib/PluginManager");
+
+class Nexus {
 	constructor(config) {
 		this.config = config;
 		this.client = new Discord.Client();
@@ -13,7 +14,7 @@ export class Nexus {
 		this.eventHandlers = new Map();
 
 		this.TaskManager = new TaskManager(this);
-		this.CommandHandler = new CommandHandler(this);
+		this.CommandHandler = new CommandUtil.CommandHandler(this);
 		this.PluginManager = new PluginManager(this);
 
 		this.startedOn = Date.now();
@@ -46,3 +47,5 @@ export class Nexus {
 		Util.log("DISCORD","connected.");
 	}
 }
+
+module.exports = Nexus;

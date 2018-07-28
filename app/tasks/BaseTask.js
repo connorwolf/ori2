@@ -1,4 +1,4 @@
-export class BaseTask {
+class BaseTask {
 	constructor(bot, options) {
 		this.bot = bot;
 		this.options = options;
@@ -24,3 +24,5 @@ export class BaseTask {
 		return this.completed ? Date.now() - this.startedAt : this.completedAt - this.startedAt;
 	}
 }
+
+module.exports = BaseTask;

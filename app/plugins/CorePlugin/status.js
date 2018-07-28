@@ -1,6 +1,5 @@
-import { Command, CommandSyntax } from "../../lib/CommandHandler";
-import { NexusEmbed } from "../../lib/NexusEmbed";
-
+const CommandUtil = require("../../lib/CommandUtil"),
+	NexusEmbed = require("../../lib/NexusEmbed");
 function format(seconds) {
 	function pad(s) {
 		return (s < 10 ? "0" : "") + s;
@@ -12,12 +11,12 @@ function format(seconds) {
 	return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
 }
 
-const status = new Command(
+const status = new CommandUtil.Command(
 	{
 		name: "status",
 		description: "Returns the bot's status",
 		global: true,
-		syntax: new CommandSyntax("")
+		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m) {
 		let embed = new NexusEmbed().setTitle("Bot Status").setDescription(`
@@ -35,4 +34,4 @@ DM <@210118905006522369> for more info on what these mean.
 	}
 );
 
-export default status;
+module.exports = status;

@@ -1,7 +1,7 @@
-import Util from "./Util";
-import { SubHandler } from "./EventHandler";
+const Util = require("./Util"),
+	SubHandler = require("./EventHandler").SubHandler;
 
-export class CommandSyntax {
+class CommandSyntax {
 	constructor(syntax_string) {
 		this.syntax_string = syntax_string;
 		this.syntaxArray = this.syntax_string.split(" ");
@@ -9,14 +9,14 @@ export class CommandSyntax {
 }
 
 
-export class Command {
+class Command {
 	constructor(options, exec) {
 		this.options = options;
 		this.run = exec;
 	}
 }
 
-export class CommandHandler {
+class CommandHandler {
 	constructor(bot) {
 		this.bot = bot;
 		this.guildCommands = new Map();
@@ -111,3 +111,9 @@ export class CommandHandler {
 		this.globalCommands.set(commandid, null);
 	}
 }
+
+module.exports = {
+	CommandHandler,
+	Command,
+	CommandSyntax
+};

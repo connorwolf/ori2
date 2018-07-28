@@ -1,4 +1,4 @@
-export class BasePlugin {
+class BasePlugin {
 	constructor(/*options: PluginOptions*/) {}
 
 	start() {}
@@ -6,3 +6,5 @@ export class BasePlugin {
 	unload() {}
 	stop() {}
 }
+
+module.exports = BasePlugin;

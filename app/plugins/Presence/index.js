@@ -1,11 +1,11 @@
-import { BasePlugin } from "../BasePlugin";
-import Util from "../../lib/Util";
-
+const BasePlugin = require("../BasePlugin"),
+	Util = require("../../lib/Util");
+    
 function updatePresence(client) {
 	client.user.setActivity(`v${Util.package.version} | ${client.users.size} members`);
 }
 
-export class Presence extends BasePlugin {
+class Presence extends BasePlugin {
 	constructor(bot) {
 		super();
 		this.options = {
@@ -24,4 +24,4 @@ export class Presence extends BasePlugin {
 	}
 }
 
-export default Presence;
+module.exports = Presence;

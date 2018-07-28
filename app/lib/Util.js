@@ -1,6 +1,7 @@
-import * as util from "util";
-import "colors";
-const ts = require("time-stamp");
+const util = require("util"),
+	ts = require("time-stamp");
+
+require("colors");
 
 const Util = {
 	log(...args) {
@@ -12,4 +13,4 @@ const Util = {
 	package: require("../../package.json")
 };
 
-export default Util;
+module.exports = Util;

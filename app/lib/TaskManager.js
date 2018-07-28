@@ -1,7 +1,7 @@
-import Util from "./Util";
+const Util = require("./Util");
 
-import PrepareCache from "../tasks/PrepareCache";
-import SetupEventHandlers from "../tasks/SetupEventHandlers";
+const PrepareCache = require("../tasks/PrepareCache"),
+	SetupEventHandlers = require("../tasks/SetupEventHandlers");
 
 class TaskManager {
 	constructor(bot) {
@@ -19,4 +19,4 @@ class TaskManager {
 	}
 }
 
-export default TaskManager;
+module.exports = TaskManager;

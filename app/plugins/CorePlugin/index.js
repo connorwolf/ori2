@@ -1,12 +1,12 @@
-import Util from "../../lib/Util";
-import { BasePlugin } from "../BasePlugin";
-import { Presence } from "../Presence";
+const Util = require("../../lib/Util"),
+	BasePlugin = require("../BasePlugin"),
+	Presence = require("../Presence");
 
-import status from "./status";
-import plugins from "./plugins";
-import { NibelPlugin } from "../NibelPlugin";
+const status = require("./status"),
+	plugins = require("./plugins"),
+	NibelPlugin = require("../NibelPlugin");
 
-export class CorePlugin extends BasePlugin {
+class CorePlugin extends BasePlugin {
 	constructor(bot) {
 		super();
 		this.options = {
@@ -28,3 +28,5 @@ export class CorePlugin extends BasePlugin {
 		this.bot.CommandHandler.registerGlobalCommand(plugins);
 	}
 }
+
+module.exports = CorePlugin;

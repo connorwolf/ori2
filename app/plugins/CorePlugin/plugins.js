@@ -1,12 +1,12 @@
-import { Command, CommandSyntax } from "../../lib/CommandHandler";
-import { NexusEmbed } from "../../lib/NexusEmbed";
+const CommandUtil = require("../../lib/CommandUtil"),
+	NexusEmbed = require("../../lib/NexusEmbed");
 
-const plugins = new Command(
+const plugins = new CommandUtil.Command(
 	{
 		name: "plugins",
 		description: "Retrieves information about various plugins enabled.",
 		global: true,
-		syntax: new CommandSyntax("")
+		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m) {
 		let temp = [];
@@ -22,4 +22,4 @@ const plugins = new Command(
 	}
 );
 
-export default plugins;
+module.exports = plugins;

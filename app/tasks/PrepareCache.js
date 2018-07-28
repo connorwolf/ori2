@@ -1,6 +1,6 @@
-import Util from "../lib/Util";
-import { Guild } from "../../shared/models/GuildModel";
-import { BaseTask } from "./BaseTask";
+const Util = require("../lib/Util"),
+	Guild = require("../../shared/models/GuildModel").Guild,
+	BaseTask = require("../tasks/BaseTask");
 
 class PrepareCache extends BaseTask {
 	constructor(bot) {
@@ -47,4 +47,4 @@ class PrepareCache extends BaseTask {
 	}
 }
 
-export default PrepareCache;
+module.exports = PrepareCache;

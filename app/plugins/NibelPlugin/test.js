@@ -1,12 +1,12 @@
-import { Command, CommandSyntax } from "../../lib/CommandHandler";
-import { NexusEmbed } from "../../lib/NexusEmbed";
+const CommandUtil = require("../../lib/CommandUtil"),
+	NexusEmbed = require("../../lib/NexusEmbed");
 
-const plugins = new Command(
+const test = new CommandUtil.Command(
 	{
 		name: "test",
 		description: "Test command for Nibel",
 		global: true,
-		syntax: new CommandSyntax("")
+		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m) {
 		let commands;
@@ -27,4 +27,4 @@ const plugins = new Command(
 	}
 );
 
-export default plugins;
+module.exports = test;

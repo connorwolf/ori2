@@ -1,9 +1,9 @@
-import { BasePlugin } from "../BasePlugin";
-import Util from "../../lib/Util";
+const BasePlugin = require("../BasePlugin"),
+	Util = require("../../lib/Util");
 
-import test from "./test";
+const test = require("./test");
 
-export class NibelPlugin extends BasePlugin {
+class NibelPlugin extends BasePlugin {
 	constructor(bot) {
 		super();
 		this.options = {
@@ -25,3 +25,5 @@ export class NibelPlugin extends BasePlugin {
 		this.bot.CommandHandler.registerCommand(nibel, test);
 	}
 }
+
+module.exports = NibelPlugin;

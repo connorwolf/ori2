@@ -1,7 +1,7 @@
-import { RichEmbed } from "discord.js";
-import Util from "./Util";
+const RichEmbed = require("discord.js").RichEmbed,
+	Util = require("../lib/Util");
 
-export class NexusEmbed extends RichEmbed {
+class NexusEmbed extends RichEmbed {
 	constructor() {
 		super();
 		this.setTimestamp();
@@ -13,3 +13,5 @@ export class NexusEmbed extends RichEmbed {
 		);
 	}
 }
+
+module.exports = NexusEmbed;

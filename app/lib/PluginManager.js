@@ -1,4 +1,4 @@
-import { CorePlugin } from "../plugins/CorePlugin";
+const CorePlugin = require("../plugins/CorePlugin");
 
 class PluginManager {
 	constructor(bot) {
@@ -25,4 +25,4 @@ class PluginManager {
 	}
 }
 
-export default PluginManager;
+module.exports = PluginManager;
