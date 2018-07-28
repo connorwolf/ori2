@@ -1,0 +1,42 @@
+import * as Progress from "progress";
+import Util from "../lib/Util";
+import ClientEvents from "../lib/ClientEvents";
+import { BaseTask } from "./BaseTask";
+import { EventHandler, SubHandler } from "../lib/EventHandler";
+
+const defaultEventFunctions = [
+	{
+		event: "error",
+		function: (handler, error) => {
+			Util.log("DISCORD", "ERROR", error.messsage);
+		}
+	}
+];
+
+class SetupEventHandlers extends BaseTask {
+	constructor(bot) {
+		super(bot, {
+			name: "SetupEventHandlers"
+		});
+		this.callback = async function() {
+			Util.log("SETUPEVENTHANDLERS", `applying handlers to ${ClientEvents.length} events...`);
+			let bar = new Progress("Applying handlers [:bar] :percent", ClientEvents.length);
+
+			await ClientEvents.map((event) => {
+				bot.eventHandlers.set(event, new EventHandler(this.bot, event));
+
+				defaultEventFunctions.map((fn) => {
+					let handler = bot.eventHandlers.get(fn.event);
+					handler
+						? handler.addHandler(new SubHandler(handler, "auto", fn.function))
+						: Error("No event for default event function found!");
+				});
+
+				bar.tick();
+			});
+			Util.log("SETUPEVENTHANDLERS", "done.");
+		};
+	}
+}
+
+export default SetupEventHandlers;

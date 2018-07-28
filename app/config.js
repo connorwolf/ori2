@@ -3,7 +3,7 @@ module.exports = {
     prefix: "!"
   },
   bot: {
-    token: "NDcwMTg1MDk5Njg2ODM4Mjc0.DjYH6A.C-yY9FJSGHsydy66fetjAYrgCBM"
+      token: "NDMwNDU2MDY4NzI4OTQ2NzA4.DjjUmQ.GXRlLZQqZPk_FBzmj72RMpUBVBE"
   },
   db: {
     url: "mongodb://localhost:4696/ori2"
