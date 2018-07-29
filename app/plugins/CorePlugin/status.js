@@ -1,5 +1,7 @@
 const CommandUtil = require("../../lib/CommandUtil"),
-	NexusEmbed = require("../../lib/NexusEmbed");
+	NexusEmbed = require("../../lib/NexusEmbed"),
+	Util = require("../../lib/Util");
+
 function format(seconds) {
 	function pad(s) {
 		return (s < 10 ? "0" : "") + s;
@@ -19,9 +21,10 @@ const status = new CommandUtil.Command(
 		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m) {
-		let embed = new NexusEmbed().setTitle("Bot Status").setDescription(`
+		let embed = new NexusEmbed().setTitle("Bot Status").setThumbnail(b.client.user.avatarURL).setDescription(`
 Here's a list of various statuses I found lying around...
 
+Version: \`v${Util.package.version}\`
 Ping: \`${Math.round((b.client.ping + Date.now() - m.createdTimestamp) / 2)}ms\`
 Response Time: \`${Math.round(Date.now() - m.createdTimestamp)}ms\`
 Uptime: \`${format(process.uptime())}\`

@@ -4,7 +4,9 @@ const Util = require("../../lib/Util"),
 
 const status = require("./status"),
 	plugins = require("./plugins"),
-	NibelPlugin = require("../NibelPlugin");
+	info = require("./info");
+
+const NibelPlugin = require("../NibelPlugin");
 
 class CorePlugin extends BasePlugin {
 	constructor(bot) {
@@ -26,6 +28,7 @@ class CorePlugin extends BasePlugin {
 		Util.log("CORE", "registering commands...");
 		this.bot.CommandHandler.registerGlobalCommand(status);
 		this.bot.CommandHandler.registerGlobalCommand(plugins);
+		this.bot.CommandHandler.registerGlobalCommand(info);
 	}
 }
 

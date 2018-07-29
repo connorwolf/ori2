@@ -2,6 +2,7 @@
 
 class SubHandler {
 	constructor(parent, name, handler) {
+		this.parent = parent;
 		this.handle = handler;
 		this.name = name;
 	}

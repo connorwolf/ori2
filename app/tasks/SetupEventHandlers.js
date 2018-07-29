@@ -3,13 +3,53 @@ const Progress = require("progress");
 const Util = require("../lib/Util"),
 	ClientEvents = require("../lib/ClientEvents"),
 	BaseTask = require("../tasks/BaseTask"),
-	EventHandler = require("../lib/EventHandler");
+	EventHandler = require("../lib/EventHandler"),
+	Guild = require("../../shared/models/GuildModel").Guild;
+
+function cache(bot, guild) {
+	Guild.findOne(
+		{
+			gid: guild.id
+		},
+		(err, res) => {
+			if (err) return Error(err.message);
+			if (!res) {
+				let guild = new Guild({
+					name: guild.name,
+					gid: guild.id,
+					options: {
+						channels: {},
+						prefix: bot.config.defaults.prefix
+					}
+				});
+				guild.save();
+				bot.cache.set(guild.id, {
+					name: guild.name,
+					gid: guild.id,
+					options: {
+						channels: {},
+						prefix: bot.config.defaults.prefix
+					}
+				});
+			} else {
+				bot.cache.set(res.gid, res);
+			}
+			bot.cache.get(guild.id) ? null : Util.log("CACHE", "ERROR", `${guild.id} failed`);
+		}
+	);
+}
 
 const defaultEventFunctions = [
 	{
 		event: "error",
 		function: (handler, error) => {
-			Util.log("DISCORD", "ERROR", error.messsage);
+			Util.log("DISCORD", "ERROR", error);
+		}
+	},
+	{
+		event: "guildCreate",
+		function: (handler, guild) => {
+			cache(handler.parent.bot, guild);
 		}
 	}
 ];
