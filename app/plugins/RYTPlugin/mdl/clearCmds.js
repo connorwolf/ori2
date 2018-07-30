@@ -14,7 +14,7 @@ module.exports = function(client) {
 
 		});
 
-		c.bulkDelete(toDelete).catch(() => {});
+		c.bulkDelete(toDelete);
 
 	});
 };
