@@ -18,9 +18,7 @@ const prefix = new CommandUtil.Command(
 		g.options.prefix = a[0];
 		
 		Guild.findOneAndUpdate({ gid: m.guild.id }, { $set: { options: { prefix: a[0] } } }, (err, doc, res) => {
-			if (err) return m.reply(":negative_squared_cross_mark: Failed to update guild prefix.");
-			console.log(doc);
-			console.log(res);
+			if (err || !doc) return m.reply(":negative_squared_cross_mark: Failed to update guild prefix.");
             
 			b.cache.set(g.gid, g);
             
