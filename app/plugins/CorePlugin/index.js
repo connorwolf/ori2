@@ -5,7 +5,8 @@ const Util = require("../../lib/Util"),
 const status = require("./cmds/status"),
 	plugins = require("./cmds/plugins"),
 	info = require("./cmds/info"),
-	clear = require("./cmds/clear");
+	clear = require("./cmds/clear"),
+	prefix = require("./cmds/prefix");
 
 const NibelPlugin = require("../NibelPlugin");
 const RYTPlugin = require("../RYTPlugin");
@@ -33,6 +34,7 @@ class CorePlugin extends BasePlugin {
 		this.bot.CommandHandler.registerGlobalCommand(plugins);
 		this.bot.CommandHandler.registerGlobalCommand(info);
 		this.bot.CommandHandler.registerGlobalCommand(clear);
+		this.bot.CommandHandler.registerGlobalCommand(prefix);
 	}
 }
 
