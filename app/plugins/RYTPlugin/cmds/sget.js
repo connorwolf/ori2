@@ -15,7 +15,7 @@ const sget = new CommandUtil.Command(
 		if (a.length < 1) {
 			let embed = new NexusEmbed().setTitle("Report List");
 
-			Report.find((err, res) => {
+			Report.find({guildID: m.guild.id}, (err, res) => {
 				if (err) Util.log("SGET", "ERROR", err);
 
 				let rs = [];
@@ -34,7 +34,7 @@ For more information on a specific report, type \`!sget <reportID>\`
 				m.channel.send({ embed });
 			});
 		} else {
-			Report.findOne({ sid: a[0] }, (err, res) => {
+			Report.findOne({ sid: a[0], guildID: m.guild.id }, (err, res) => {
 				if (err) Util.log("SGET", "ERROR", err);
 				if (!res)
 					return m.reply(
@@ -43,7 +43,8 @@ For more information on a specific report, type \`!sget <reportID>\`
 				let embed = new NexusEmbed()
 					.setTitle("Support Request")
 					.setDescription(`Request from <@${res.userID}>: \`\`\`${res.msg}\`\`\``)
-					.addField("Report ID", res.sid)
+					.addField("Report ID", res.sid, true)
+					.addField("Guild ID", res.guildID, true)
 					.addField("Subbmitted At", res.submittedAt);
 
 				m.channel.send({ embed });

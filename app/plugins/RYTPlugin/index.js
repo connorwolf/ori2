@@ -6,6 +6,8 @@ const support = require("./cmds/support"),
 	sdel = require("./cmds/sdel"),
 	sreply = require("./cmds/sreply");
 
+const clearCmds = require("./mdl/clearCmds");
+
 class RYTPlugin extends BasePlugin {
 	constructor(bot) {
 		super();
@@ -18,6 +20,8 @@ class RYTPlugin extends BasePlugin {
 
 	start() {
 		this.registerComands();
+		clearCmds(this.bot.client);
+		setInterval(() => clearCmds(this.bot.client), 900e3);
 	}
 
 	registerComands() {

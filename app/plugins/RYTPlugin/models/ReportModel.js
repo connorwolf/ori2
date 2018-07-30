@@ -4,6 +4,7 @@ const Mongoose = require("mongoose");
 const ReportSchema = new Mongoose.Schema({
 	sid: String,
 	msg: String,
+	guildID: String,
 	userID: String,
 	submittedAt: Date
 }, {

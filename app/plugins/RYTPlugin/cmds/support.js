@@ -24,6 +24,7 @@ const support = new CommandUtil.Command(
 			sid: Discord.SnowflakeUtil.generate(),
 			msg: smsg,
 			userID: m.author.id,
+			guildID: m.guild.id,
 			submittedAt: new Date()
 		});
 
@@ -32,7 +33,8 @@ const support = new CommandUtil.Command(
 		let embed = new NexusEmbed()
 			.setTitle("Support Request")
 			.setDescription(`Request from <@${m.author.id}>: \`\`\`${smsg}\`\`\``)
-			.addField("Report ID", report.sid)
+			.addField("Report ID", report.sid, true)
+			.addField("Guild ID", report.guildID, true)
 			.addField("Subbmitted At", new Date());
 
 		m.guild.channels.get("472884845597687819").send({ embed });

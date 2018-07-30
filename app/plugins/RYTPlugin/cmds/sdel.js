@@ -13,7 +13,7 @@ const sdel = new CommandUtil.Command(
 		if (a.length < 1)
 			m.reply(":negative_squared_cross_mark: Please specify the ID of the report to delete");
 		else if (a[0] == "all") {
-			Report.count({}, (err, count) => {
+			Report.count({ guildID: m.guild.id }, (err, count) => {
 				if (err)
 					return m.reply(
 						":negative_squared_cross_mark: Could not delete reports."
@@ -21,19 +21,19 @@ const sdel = new CommandUtil.Command(
 				else if (count < 1) return m.reply(
 					":negative_squared_cross_mark: No reports to delete."
 				);
-				Report.deleteMany({}, (err) => {
+				Report.deleteMany({ guildID: m.guild.id}, (err) => {
 					if (err) return m.reply(":negative_squared_cross_mark: Could not delete reports.");
 					else return m.reply(`:white_check_mark: Deleted ${count} reports.`);
 				});
 			});
 		} else if (a.length == 1) {
-			Report.findOne({ sid: a[0] }, (err, res) => {
+			Report.findOne({ sid: a[0], guildID: m.guild.id }, (err, res) => {
 				if (err) return m.reply(":negative_squared_cross_mark: Could not delete report.");
 				if (!res)
 					return m.reply(
 						`:negative_squared_cross_mark: A report ID \`${a[0]}\` was not found.`
 					);
-				Report.deleteOne({ sid: a[0] }, (err) => {
+				Report.deleteOne({ sid: a[0], guildID: m.guild.id }, (err) => {
 					if (err)
 						return m.reply(
 							`:negative_squared_cross_mark: A report ID \`${a[0]}\` was not found.`
@@ -42,7 +42,7 @@ const sdel = new CommandUtil.Command(
 				});
 			});
 		} else {
-			Report.findMany({ sid: { $in: a } }, (err, res) => {
+			Report.find({ sid: { $in: a }, guildID: m.guild.id }, (err, res) => {
 				if (err) return m.reply(":negative_squared_cross_mark: Could not delete reports.");
 				if (!res)
 					return m.reply(
@@ -53,7 +53,7 @@ const sdel = new CommandUtil.Command(
 				if (res.length < a.length)
 					return m.reply(":negative_squared_cross_mark: Could not delete reports.");
 				else {
-					Report.deleteMany({ sid: { $in: a } }, (err) => {
+					Report.deleteMany({ sid: { $in: a }, guildID: m.guild.id }, (err) => {
 						if (err)
 							return m.reply(
 								":negative_squared_cross_mark: Could not delete reports."

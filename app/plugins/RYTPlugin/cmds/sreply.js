@@ -22,7 +22,7 @@ const sreply = new CommandUtil.Command(
 		} else {
 			let id = a.shift();
 			let msg = a.join(" ");
-			Report.findOne({ sid: id }, (err, res) => {
+			Report.findOne({ sid: id, guildID: m.guild.id }, (err, res) => {
 				if (err) Util.log("SGET", "ERROR", err);
 				if (!res)
 					return m.reply(
@@ -45,7 +45,7 @@ const sreply = new CommandUtil.Command(
 							.addField("Subbmitted At", res.submittedAt, true);
 
 						ch.send({ embed });
-						Report.deleteOne({ sid: id }, (err) => {
+						Report.deleteOne({ sid: id, guildID: m.guild.id }, (err) => {
 							if (err)
 								m.reply(
 									`:negative_squared_cross_mark: There was an error whilst deleting the report entry (ID: \`${id}\``
