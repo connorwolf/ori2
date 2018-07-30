@@ -15,11 +15,12 @@ const prefix = new CommandUtil.Command(
 		}
 		let g = b.cache.get(m.guild.id);
 		let oldprefix = g.options.prefix;
+		g.options.prefix = a[0];
 		
-		Guild.findOneAndUpdate({ gid: g.id }, { options: { prefix: a[0]}}, (err) => {
+		Guild.findOneAndUpdate({ gid: g.id }, { g }, (err) => {
 			if (err) return m.reply(":negative_squared_cross_mark: Failed to update guild prefix.");
             
-			g.options.prefix = a[0];
+			
 			b.cache.set(g.gid, g);
             
 			return m.reply(`:white_check_mark: Changed prefix from \`${oldprefix}\` to \`${g.options.prefix}\`.`);
