@@ -65,7 +65,7 @@ class CommandHandler {
 
 								if (
 									this.guildCommands.get(m.guild.id) &&
-									this.guildCommands.get(m.guild.id)[cmd]
+							this.guildCommands.get(m.guild.id)[cmd]
 								) {
 									Util.log(
 										"COMMAND",
