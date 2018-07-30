@@ -1,10 +1,10 @@
 module.exports = function(c) {
-	let m = c.channels.get("453641475008364544");
+	let c = c.channels.get("453641475008364544");
 	let count = 100;
 
 	let toDelete = [];
 
-	m.channel.fetchMessages({
+	c.fetchMessages({
 		limit: count
 	}).then((msgs) => {
 		msgs.map((msg) => {
@@ -14,7 +14,7 @@ module.exports = function(c) {
 
 		});
 
-		m.channel.bulkDelete(toDelete).catch(() => {});
+		c.bulkDelete(toDelete).catch(() => {});
 
 	});
 };
