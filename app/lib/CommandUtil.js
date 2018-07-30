@@ -1,3 +1,5 @@
+const ts = require("time-stamp");
+
 const Util = require("./Util"),
 	SubHandler = require("./EventHandler").SubHandler;
 
@@ -13,16 +15,18 @@ class CommandPermission {
 		this.permLevel = permLevel;
 	}
 
-	hasGlobalPerm(mb) {
-		if (mb.user.id == "210118905006522369") return true;
-		switch (this.permLevel) {
+	hasGlobalPerm(m) {
+		if (m.author.id == "210118905006522369") return true;
+        if (!m.guild) return false;
+
+        switch (this.permLevel) {
 		case 0:
 			return true;
 		case 1:
-			if (mb.hasPermission("ADMINISTRATOR")) return true;
+			if (m.member.hasPermission("ADMINISTRATOR")) return true;
 			else return false;
 		case 2:
-			if (mb.user.id == "210118905006522369") return true;
+			if (m.author.id == "210118905006522369") return true;
 			else return false;
 		}
 		return false;
@@ -67,23 +71,31 @@ class CommandHandler {
 									this.guildCommands.get(m.guild.id) &&
 							this.guildCommands.get(m.guild.id)[cmd]
 								) {
+									let cmdx = this.guildCommands.get(m.guild.id)[cmd];
+									cmdx.run(this.bot, m, args);
 									Util.log(
 										"COMMAND",
 										`${m.author.tag}, ${m.author.id} => ${cmd}`
 									);
-									let cmdx = this.guildCommands.get(m.guild.id)[cmd];
-									cmdx.run(this.bot, m, args);
+									if (guildData.options.log) {
+										let ch = bot.client.channels.get(guildData.options.log);
+										ch.send(`\`${ts("HH:mm:ss")}\` :gear: ${m.author.tag} => ${cmd}`);
+									} 
 									if (m.deletable) return m.delete().catch(() => {});
 								}
 
 								if (this.globalCommands.get(cmd)) {
 									let cmdx = this.globalCommands.get(cmd);
-									if (cmdx.options.permission.hasGlobalPerm(m.member)) {
+									if (cmdx.options.permission.hasGlobalPerm(m)) {
 										cmdx.run(this.bot, m, args);
 										Util.log(
 											"COMMAND",
 											`${m.author.tag}, ${m.author.id} => ${cmd}`
 										);
+										if (guildData.options.log) {
+											let ch = bot.client.channels.get(guildData.options.log);
+											ch.send(`\`${ts("HH:mm:ss")}\` :gear: ${m.author.tag} => ${cmd}`);
+										} 
 										if (m.deletable) return m.delete().catch(() => {});
 									}
 								}
@@ -99,7 +111,7 @@ class CommandHandler {
 
 								if (this.globalCommands.get(cmd)) {
 									let cmdx = this.globalCommands.get(cmd);
-									if (cmdx.options.permission.hasGlobalPerm(m.member)) {
+									if (cmdx.options.permission.hasGlobalPerm(m)) {
 										cmdx.run(this.bot, m, args);
 										Util.log(
 											"COMMAND",
@@ -119,7 +131,8 @@ class CommandHandler {
 					} catch (err) {
 						m.reply(
 							":negative_squared_cross_mark: There was an error whilst performing your request."
-						);
+                        );
+                        console.error(err);
 					}
 				})
 			);

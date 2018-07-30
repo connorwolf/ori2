@@ -6,10 +6,12 @@ const status = require("./cmds/status"),
 	plugins = require("./cmds/plugins"),
 	info = require("./cmds/info"),
 	clear = require("./cmds/clear"),
-	prefix = require("./cmds/prefix");
+	prefix = require("./cmds/prefix"),
+	crypt = require("./cmds/crypt");
 
 const NibelPlugin = require("../NibelPlugin");
 const RYTPlugin = require("../RYTPlugin");
+const SFEPlugin = require("../SFEPlugin");
 
 class CorePlugin extends BasePlugin {
 	constructor(bot) {
@@ -25,6 +27,7 @@ class CorePlugin extends BasePlugin {
 		this.bot.PluginManager.loadPlugin(new Presence(this.bot));
 		this.bot.PluginManager.loadPlugin(new NibelPlugin(this.bot));
 		this.bot.PluginManager.loadPlugin(new RYTPlugin(this.bot));
+		this.bot.PluginManager.loadPlugin(new SFEPlugin(this.bot));
 		this.registerComands();
 	}
 
@@ -35,6 +38,7 @@ class CorePlugin extends BasePlugin {
 		this.bot.CommandHandler.registerGlobalCommand(info);
 		this.bot.CommandHandler.registerGlobalCommand(clear);
 		this.bot.CommandHandler.registerGlobalCommand(prefix);
+		this.bot.CommandHandler.registerGlobalCommand(crypt);
 	}
 }
 

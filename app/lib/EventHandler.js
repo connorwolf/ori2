@@ -1,4 +1,4 @@
-// import Util from '../lib/Util';
+const Util = require("../lib/Util");
 
 class SubHandler {
 	constructor(parent, name, handler) {
@@ -19,7 +19,11 @@ class EventHandler {
 		bot.client.on(eventName, (...args) => {
 			this.defaultFunction ? this.defaultFunction(this, ...args) : null;
 			this.subHandlers.forEach((handler) => {
-				handler.handle(this, ...args);
+				try {
+					handler.handle(this.bot, ...args);
+				} catch (err) {
+					Util.log(handler.name, "ERROR", err);
+				}
 			});
 		});
 	}
