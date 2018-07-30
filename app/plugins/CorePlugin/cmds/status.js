@@ -1,6 +1,6 @@
-const CommandUtil = require("../../lib/CommandUtil"),
-	NexusEmbed = require("../../lib/NexusEmbed"),
-	Util = require("../../lib/Util");
+const CommandUtil = require("../../../lib/CommandUtil"),
+	NexusEmbed = require("../../../lib/NexusEmbed"),
+	Util = require("../../../lib/Util");
 
 function format(seconds) {
 	function pad(s) {
@@ -18,15 +18,17 @@ const status = new CommandUtil.Command(
 		name: "status",
 		description: "Returns the bot's status",
 		global: true,
+		permission: new CommandUtil.CommandPermission(0),
 		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m) {
-		let embed = new NexusEmbed().setTitle("Bot Status").setThumbnail(b.client.user.avatarURL).setDescription(`
+		let embed = new NexusEmbed().setTitle("Bot Status").setThumbnail(b.client.user.avatarURL)
+			.setDescription(`
 Here's a list of various statuses I found lying around...
 
 Version: \`v${Util.package.version}\`
-Ping: \`${Math.round((b.client.ping + Date.now() - m.createdTimestamp) / 2)}ms\`
-Response Time: \`${Math.round(Date.now() - m.createdTimestamp)}ms\`
+Ping: \`${Math.round(b.client.ping)}ms\`
+Response Time: \`${(Math.round(Date.now() - m.createdTimestamp))}ms\`
 Uptime: \`${format(process.uptime())}\`
 Loaded Plugins: \`${b.PluginManager.plugins.size}\`
 Registered Commands: \`${b.CommandHandler.globalCommands.size}\`

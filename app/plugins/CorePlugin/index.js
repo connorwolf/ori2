@@ -2,11 +2,13 @@ const Util = require("../../lib/Util"),
 	BasePlugin = require("../BasePlugin"),
 	Presence = require("../Presence");
 
-const status = require("./status"),
-	plugins = require("./plugins"),
-	info = require("./info");
+const status = require("./cmds/status"),
+	plugins = require("./cmds/plugins"),
+	info = require("./cmds/info"),
+	clear = require("./cmds/clear");
 
 const NibelPlugin = require("../NibelPlugin");
+const RYTPlugin = require("../RYTPlugin");
 
 class CorePlugin extends BasePlugin {
 	constructor(bot) {
@@ -21,6 +23,7 @@ class CorePlugin extends BasePlugin {
 	start() {
 		this.bot.PluginManager.loadPlugin(new Presence(this.bot));
 		this.bot.PluginManager.loadPlugin(new NibelPlugin(this.bot));
+		this.bot.PluginManager.loadPlugin(new RYTPlugin(this.bot));
 		this.registerComands();
 	}
 
@@ -29,6 +32,7 @@ class CorePlugin extends BasePlugin {
 		this.bot.CommandHandler.registerGlobalCommand(status);
 		this.bot.CommandHandler.registerGlobalCommand(plugins);
 		this.bot.CommandHandler.registerGlobalCommand(info);
+		this.bot.CommandHandler.registerGlobalCommand(clear);
 	}
 }
 

@@ -1,7 +1,10 @@
 const BasePlugin = require("../BasePlugin"),
 	Util = require("../../lib/Util");
 
-const test = require("./test");
+const support = require("./cmds/support"),
+	sget = require("./cmds/sget"),
+	sdel = require("./cmds/sdel"),
+	sreply = require("./cmds/sreply");
 
 class RYTPlugin extends BasePlugin {
 	constructor(bot) {
@@ -20,9 +23,12 @@ class RYTPlugin extends BasePlugin {
 	registerComands() {
 		Util.log("RYT", "registering commands...");
 
-		let rcd = this.bot.client.guilds.get("");
+		let rcd = this.bot.client.guilds.get("391941909335244801");
 		if (!rcd) return;
-		this.bot.CommandHandler.registerCommand(rcd, test);
+		this.bot.CommandHandler.registerCommand(rcd, support);
+		this.bot.CommandHandler.registerCommand(rcd, sget);
+		this.bot.CommandHandler.registerCommand(rcd, sdel);
+		this.bot.CommandHandler.registerCommand(rcd, sreply);
 	}
 }
 

@@ -41,8 +41,10 @@ class Nexus {
     
 	async setupClient() {
 		await this.client.login(this.config.bot.token)
-			.catch(() => {
+			.catch((err) => {
 				Util.log("DISCORD", "ERROR", "failed to login to Discord.");
+				Util.log("DISCORD", "ERROR", err.message);
+				process.exit(1);
 			});
 		Util.log("DISCORD","connected.");
 	}

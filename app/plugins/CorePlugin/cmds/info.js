@@ -1,6 +1,6 @@
-const CommandUtil = require("../../lib/CommandUtil"),
-	NexusEmbed = require("../../lib/NexusEmbed"),
-	Util = require("../../lib/Util");
+const CommandUtil = require("../../../lib/CommandUtil"),
+	NexusEmbed = require("../../../lib/NexusEmbed"),
+	Util = require("../../../lib/Util");
 
 function formUserEmbed(u, m) {
 	let embed = new NexusEmbed().setTitle("")
@@ -53,6 +53,7 @@ const status = new CommandUtil.Command(
 		name: "info",
 		description: "Fetch info on a user/guild",
 		global: true,
+		permission: new CommandUtil.CommandPermission(0),
 		syntax: new CommandUtil.CommandSyntax("")
 	},
 	async function(b, m, a) {
@@ -72,7 +73,7 @@ const status = new CommandUtil.Command(
 					return formRoleEmbed(m.mentions.roles.first(), m);
 				}
 			} 
-			else m.reply(`Cannot resolve \`${a[0]}\` to type \`user/guild/role/channel/snowflake\`.`);
+			return m.reply(`Cannot resolve \`${a[0]}\` to type \`user/guild/role/channel/snowflake\`.`);
 		}
 		return formUserEmbed(m.author, m);
 	}
