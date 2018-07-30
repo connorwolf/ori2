@@ -31,7 +31,8 @@ function formRoleEmbed(u, m) {
 	});
 }
 
-function formGuildEmbed(u, m) {
+function formGuildEmbed(u, m, b) {
+	let g = b.cache.get(m.guild.id);
 	let embed = new NexusEmbed().setTitle("")
 		.setAuthor(u.name, u.iconURL)
 		.addField("Name", u.name, true)
@@ -42,6 +43,7 @@ function formGuildEmbed(u, m) {
 		.addField("Members", u.members.array().length, true)
 		.addField("Channels", u.channels.array().length, true)
 		.addField("Roles", u.roles.array().length, true)
+		.addField("Prefix", g.options.prefix,true)
 		.setThumbnail(u.iconURL);
 	m.channel.send({ embed }).catch((err) => {
 		Util.log(err);
@@ -61,7 +63,7 @@ const status = new CommandUtil.Command(
 			if (b.client.users.get(a[0])) {
 				return formUserEmbed(b.client.users.get(a[0]), m);
 			} else if (b.client.guilds.get(a[0])) {
-				return formGuildEmbed(b.client.guilds.get(a[0]), m);
+				return formGuildEmbed(b.client.guilds.get(a[0]), m, b);
 			} else if (b.client.channels.get(a[0])) {
 				return formChannelEmbed(b.client.channels.get(a[0]), m);
 			} else if (m.mentions) {
