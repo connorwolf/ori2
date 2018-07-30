@@ -1,5 +1,5 @@
-module.exports = function(c) {
-	let c = c.channels.get("453641475008364544");
+module.exports = function(client) {
+	let c = client.channels.get("453641475008364544");
 	let count = 100;
 
 	let toDelete = [];
