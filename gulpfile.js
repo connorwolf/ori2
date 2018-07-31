@@ -13,4 +13,4 @@ gulp.task("git-watch", function() {
 		});
 });
 
-gulp.task("default", "git-watch");
+gulp.task("default", ["git-watch"]);
