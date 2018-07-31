@@ -46,7 +46,7 @@ class SFEPlugin extends BasePlugin {
 						m.reply(`:warning: **Heads up!**
 
 The guild \`${invite.guild.name}\`, ID: \`${invite.guild.id}\` appears to have already been partnered by **${res.userTag}**.
-You might want to check with the guild to see if this is ok.
+You might want to check with the guild to see if this is ok. Or not - you might be able to get away with it ;)
 
 Last Partnered: \`${res.partneredAt}\`
 `);
