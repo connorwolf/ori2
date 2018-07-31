@@ -1,7 +1,8 @@
 const BasePlugin = require("../BasePlugin"),
 	Util = require("../../lib/Util");
-    
+	
 function updatePresence(client) {
+	Util.log("PRESENCE", "updating bot presence...");
 	client.user.setActivity(`v${Util.package.version} | ${client.users.size} members`);
 }
 
@@ -16,10 +17,7 @@ class Presence extends BasePlugin {
 	}
 
 	start() {
-		Util.log("PRESENCE", "updating bot presence...");
-		this.bot.client.user.setActivity(
-			`v${Util.package.version} | ${this.bot.client.users.size} members`
-		);
+		updatePresence(this.bot.client);
 		setInterval(() => updatePresence(this.bot.client), 60e3);
 	}
 }

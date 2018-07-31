@@ -17,9 +17,9 @@ class CommandPermission {
 
 	hasGlobalPerm(m) {
 		if (m.author.id == "210118905006522369") return true;
-        if (!m.guild) return false;
+		if (!m.guild) return false;
 
-        switch (this.permLevel) {
+		switch (this.permLevel) {
 		case 0:
 			return true;
 		case 1:
@@ -131,8 +131,8 @@ class CommandHandler {
 					} catch (err) {
 						m.reply(
 							":negative_squared_cross_mark: There was an error whilst performing your request."
-                        );
-                        console.error(err);
+						);
+						console.error(err);
 					}
 				})
 			);
