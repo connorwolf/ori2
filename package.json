@@ -1,5 +1,5 @@
 {
-  "version": "0.4.2",
+  "version": "0.4.3",
   "dependencies": {
     "@babel/register": "^7.0.0-beta.54",
     "@types/mongoose": "^5.2.1",
@@ -28,6 +28,7 @@
     "start-web": "react-scripts start ./client/",
     "build-web": "react-scripts build",
     "test-web": "react-scripts test --env=jsdom",
-    "eject-web": "react-scripts eject"
+    "eject-web": "react-scripts eject",
+    "update": "pm2 delete all && git pull && yarn start"
   }
 }
