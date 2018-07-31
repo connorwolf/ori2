@@ -2,7 +2,7 @@ const BasePlugin = require("../BasePlugin"),
 	Util = require("../../lib/Util");
 	
 function updatePresence(client) {
-	Util.log("PRESENCE", "updating bot presence...");
+	// Util.log("PRESENCE", "updating bot presence...");
 	client.user.setActivity(`v${Util.package.version} | ${client.users.size} members`);
 }
 
