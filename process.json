@@ -17,8 +17,12 @@
       }
     },
     {
-      "name": "db",
-      "script": "mongod --dbpath './db' --port 4696"
+      "name": "gitwatch",
+      "script": "gulp",
+      "watch_options": {
+        "awaitWriteFinish": true
+      },
+      "restart_delay": "2000"
     }
   ]
 }
