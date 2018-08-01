@@ -1,5 +1,6 @@
 const BasePlugin = require("../BasePlugin"),
-	parterDbHandler = require("./partnerDbHandler");
+	parterDbHandler = require("./partnerDbHandler"),
+	Util = require("../../lib/Util");
     
 const apply = require("./cmds/apply");
 
@@ -15,8 +16,8 @@ class SFEPlugin extends BasePlugin {
 	}
 
 	start() {
-        parterDbHandler(this.bot);
-        Util.log("RYT", "registering commands...");
+		parterDbHandler(this.bot);
+		Util.log("RYT", "registering commands...");
 		subteams.map((st) => {
 			let g = this.bot.client.guilds.get(st);
 			if (!g) return;
