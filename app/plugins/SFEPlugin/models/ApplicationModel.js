@@ -8,7 +8,7 @@ const ApplicationSchema = new Mongoose.Schema({
 	answer: String
 });
 
-const Application = Mongoose.Model("Application", ApplicationSchema);
+const Application = Mongoose.model("Application", ApplicationSchema);
 
 module.exports = {
 	ApplicationSchema,
