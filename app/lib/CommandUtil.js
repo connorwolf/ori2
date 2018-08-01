@@ -148,7 +148,7 @@ class CommandHandler {
 	}
 
 	registerCommand(guild, command) {
-		if (typeof guild == "object") {
+		if (guild.length && guild.length < 1) {
 			guild.map((g) => {
 				if (!this.guildCommands.get(g.id)) this.guildCommands.set(g.id, {});
 
