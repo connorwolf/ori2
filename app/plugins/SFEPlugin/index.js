@@ -3,7 +3,9 @@ const BasePlugin = require("../BasePlugin"),
 	Util = require("../../lib/Util");
     
 const apply = require("./cmds/apply");
+const roo = require("./cmds/roo");
 
+const sfe = "360462032811851777";
 const subteams = ["414394912138592267"];
 class SFEPlugin extends BasePlugin {
 	constructor(bot) {
@@ -23,6 +25,7 @@ class SFEPlugin extends BasePlugin {
 			if (!g) return;
 			this.bot.CommandHandler.registerCommand(g, apply);
 		});
+		this.bot.CommandHandler.registerCommands(sfe, roo);
 	}
 }
 
