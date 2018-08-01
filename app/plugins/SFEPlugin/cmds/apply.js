@@ -5,7 +5,7 @@ const CommandUtil = require("../../../lib/CommandUtil"),
 	Application = require("../models/ApplicationModel").Application;
 
 function sendToChannel(b, m, temp, ans) {
-	let g = b.guilds.get(m.guild.id);
+	let g = b.client.guilds.get(m.guild.id);
 	if (!g) return Error();
     
 	let ch = g.channels.find("name", "applications");
