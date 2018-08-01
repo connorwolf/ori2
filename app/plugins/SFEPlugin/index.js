@@ -5,7 +5,6 @@ const BasePlugin = require("../BasePlugin"),
 const apply = require("./cmds/apply");
 const roo = require("./cmds/roo");
 
-const sfe = "360462032811851777";
 const subteams = ["414394912138592267"];
 class SFEPlugin extends BasePlugin {
 	constructor(bot) {
@@ -20,6 +19,9 @@ class SFEPlugin extends BasePlugin {
 	start() {
 		parterDbHandler(this.bot);
 		Util.log("SFE", "registering commands...");
+
+		let sfe = this.bot.client.guilds.get("360462032811851777");
+
 		subteams.map((st) => {
 			let g = this.bot.client.guilds.get(st);
 			if (!g) return;
