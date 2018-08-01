@@ -13,7 +13,7 @@ const roo = new CommandUtil.Command(
 	},
 	async function (b, m, a) {
 		if (!hasUsed.get(m.author.id)) {
-			m.channel.send(`:loudspeaker: ***__ROOHORN__*** <@224076574096490496> \`${a.join(" ").replace(/[^a-zA-Z ]/g, "")}\``);
+			m.channel.send(`:loudspeaker: ***__ROOHORN__*** <@224076574096490496> \`${a.join(" ").replace(/[^a-zA-Z ]/g, "") || "hi roo this is the default message luv u 2"}\``);
 			hasUsed.set(m.author.id, true);
 			setTimeout(() => hasUsed.set(m.author.id, false), 60e3);
 		} else {
