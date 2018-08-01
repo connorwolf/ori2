@@ -49,7 +49,7 @@ Please answer all ${
 
 ${appArray.join("\n\n")}
 `);
-					let filter = (m) => m.author.id != b.user.id;
+					let filter = (m) => m.author.id != b.client.user.id;
 					let collector = ch.createMessageCollector(filter);
 					collector.on("collect", (msg) => {
 						if (m.cleanContent.length < 1) {
