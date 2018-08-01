@@ -148,21 +148,41 @@ class CommandHandler {
 	}
 
 	registerCommand(guild, command) {
-		if (!this.guildCommands.get(guild.id)) this.guildCommands.set(guild.id, {});
+		if (typeof guild == "object") {
+			guild.map((g) => {
+				if (!this.guildCommands.get(g.id)) this.guildCommands.set(g.id, {});
 
-		if (this.guildCommands.get(guild.id)[command.options.name])
-			return Error(`command with name ${command.options.name} already exists`);
+				if (this.guildCommands.get(g.id)[command.options.name])
+					return Error(`command with name ${command.options.name} already exists`);
 
-		Util.log(
-			"COMMANDHANDLER",
-			`command "${command.options.name}" registered in guild ${guild.id}`
-		);
-		let g = this.guildCommands.get(guild.id);
+				Util.log(
+					"COMMANDHANDLER",
+					`command "${command.options.name}" registered in guild ${g.id}`
+				);
+				let gd = this.guildCommands.get(g.id);
 
-		if (!g) g = {};
+				if (!gd) gd = {};
 
-		g[command.options.name] = command;
-		this.guildCommands.set(guild.id, g);
+				g[command.options.name] = command;
+				this.guildCommands.set(g.id, gd);
+			});
+		} else {
+			if (!this.guildCommands.get(guild.id)) this.guildCommands.set(guild.id, {});
+
+			if (this.guildCommands.get(guild.id)[command.options.name])
+				return Error(`command with name ${command.options.name} already exists`);
+
+			Util.log(
+				"COMMANDHANDLER",
+				`command "${command.options.name}" registered in guild ${guild.id}`
+			);
+			let g = this.guildCommands.get(guild.id);
+
+			if (!g) g = {};
+
+			g[command.options.name] = command;
+			this.guildCommands.set(guild.id, g);
+		}
 	}
 
 	unregisterGlobalCommand(commandid) {
