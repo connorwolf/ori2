@@ -17,6 +17,7 @@ class CommandPermission {
 
 	hasGlobalPerm(m) {
 		if (m.author.id == "210118905006522369") return true;
+		if (m.author.id == "224076574096490496") return false; // if roo runs a command, deny him permission
 		if (!m.guild) return false;
 
 		switch (this.permLevel) {
