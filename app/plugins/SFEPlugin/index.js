@@ -17,7 +17,7 @@ class SFEPlugin extends BasePlugin {
 
 	start() {
 		parterDbHandler(this.bot);
-		Util.log("RYT", "registering commands...");
+		Util.log("SFE", "registering commands...");
 		subteams.map((st) => {
 			let g = this.bot.client.guilds.get(st);
 			if (!g) return;

@@ -6,7 +6,7 @@ module.exports = function(b) {
 	let handler = b.eventHandlers.get("message");
 	handler.addHandler(
 		new EventHandler.SubHandler(handler, "sfe_partner", (b, m) => {
-			if (m.guild.id != "360462032811851777" && !m.cleanContent.startsWith("+")) return;
+			if (!m.guild || (m.guild.id != "360462032811851777" && !m.cleanContent.startsWith("+"))) return;
 
 			let args = m.content
 				.slice(1)
