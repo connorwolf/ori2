@@ -12,7 +12,10 @@ const roo = new CommandUtil.Command(
 	},
 	async function (b, m, a) {
 		if (!hasUsed.get(m.author.id)) {
-			m.channel.send(`:loudspeaker: ***__ROOHORN__*** <@224076574096490496> \`${a.join(" ")}\``);
+			m.channel.send(`:loudspeaker: ***__ROOHORN__*** <@224076574096490496> \`${a.join(" ")}\`
+:loudspeaker: ***__ROOHORN__*** <@224076574096490496> \`${a.join(" ")}\`
+:loudspeaker: ***__ROOHORN__*** <@224076574096490496> \`${a.join(" ")}\`
+            `);
 			hasUsed.set(m.author.id, true);
 			setTimeout(() => hasUsed.set(m.author.id, false), 60e3);
 		} else {
