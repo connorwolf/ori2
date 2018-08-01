@@ -25,7 +25,7 @@ class SFEPlugin extends BasePlugin {
 			if (!g) return;
 			this.bot.CommandHandler.registerCommand(g, apply);
 		});
-		this.bot.CommandHandler.registerCommands(sfe, roo);
+		this.bot.CommandHandler.registerCommand(sfe, roo);
 	}
 }
 
