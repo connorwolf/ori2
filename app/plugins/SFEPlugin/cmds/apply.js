@@ -21,6 +21,7 @@ function sendToChannel(b, m, temp, ans) {
 		let filter = (r) => r.emoji == "✅" || r.emoji == "❎";
 		let collector = new Discord.ReactionCollector(msg, filter);
 		collector.on("collect", (r) => {
+			msg.delete();
 			var sfe;
 			var mb;
 			switch(r.emoji.name) {
@@ -30,6 +31,7 @@ function sendToChannel(b, m, temp, ans) {
 					sfe = b.client.guilds.get("360462032811851777");
 					mb = sfe.members.get(m.author.id);
 					mb.addRole("Partnership Team").catch(() => {});
+					m.author.send(":white_check_mark: Your application has been accepted.");
 					break;
 				}
 				break;
