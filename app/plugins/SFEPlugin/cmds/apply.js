@@ -1,4 +1,5 @@
-const fs = require("fs");
+const fs = require("fs"),
+	Discord = require("discord.js");
 
 const CommandUtil = require("../../../lib/CommandUtil"),
 	NexusEmbed = require("../../../lib/NexusEmbed"),
@@ -13,7 +14,40 @@ function sendToChannel(b, m, temp, ans) {
 		.setTitle(`Application by ${m.author.tag}`)
 		.addField("Questions", temp.join("\n\n"))
 		.addField("Answer", ans);
-	ch.send({ embed });
+	ch.send({ embed }).then((msg) => {
+		msg.react("✅");
+		msg.react("❎");
+        
+		let filter = (r) => r.emoji == "✅" || r.emoji == "❎";
+		let collector = new Discord.ReactionCollector(msg, filter);
+		collector.on("collect", (r) => {
+			var sfe;
+			var mb;
+			switch(r.emoji.name) {
+			case "✅": 
+				switch(m.guild.id) {
+				case "414394912138592267":
+					sfe = b.client.guilds.get("360462032811851777");
+					mb = sfe.members.get(m.author.id);
+					mb.addRole("Partnership Team").catch(() => {});
+					break;
+				}
+				break;
+			default:
+				return;
+			case "❎":
+				switch(m.guild.id) {
+				case "414394912138592267":
+					sfe = b.client.guilds.get("360462032811851777");
+					mb = sfe.members.get(m.author.id);
+					mb.addRole("Partnership Team").catch(() => {});
+					break;
+				default:
+					return;
+				}
+			}
+		});
+	});
 }
 
 const apply = new CommandUtil.Command(
@@ -56,6 +90,7 @@ ${appArray.join("\n\n")}
 							return ch.send(":no_entry: Please enter an answer.");
 						} else {
 							ch.send(":white_check_mark: Your application has been submitted.");
+							m.member.addRole("Applicants").catch(() => {});
 							sendToChannel(b, m, appArray, msg.cleanContent);
 						}
 					});
