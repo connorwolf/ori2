@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "dependencies": {
     "@babel/register": "^7.0.0-beta.54",
     "@types/mongoose": "^5.2.1",
