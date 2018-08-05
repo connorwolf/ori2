@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import * as Mongoose from "mongoose";
 import * as Winston from "winston";
+import { PluginManager } from "./plugins/PluginManager";
 
 export interface IKrystalClientOptions {
 	defaults: {
@@ -8,6 +9,7 @@ export interface IKrystalClientOptions {
 	};
 	bot: {
 		token: string,
+		plugins: string[],
 	};
 	db: {
 		url: string,
@@ -19,34 +21,40 @@ export class KrystalClient {
 	public client: Discord.Client;
 	public cache: Discord.Collection<string, any>;
 	// public eventHandlers: Discord.Collection<string, EventHandler>;
-
 	public startedOn: number;
-	private config: IKrystalClientOptions;
+	public PluginManager: PluginManager;
+	public config: IKrystalClientOptions;
 
-	constructor(config) {
+	constructor(config: IKrystalClientOptions) {
 		this.config = config;
 		this.logger = Winston.createLogger(require("./config/winston"));
 		this.client = new Discord.Client();
 		this.cache = new Discord.Collection();
 		// this.eventHandlers = new Discord.Collection();
 		this.startedOn = Date.now();
+		this.PluginManager = new PluginManager(this);
+		this.logger.debug("KrystalClient initialised.");
 	}
 
 	public async start() {
-		this.logger.info("Test log!");
+		this.logger.info("Krystal starting...");
 		await this.setupDb();
 		await this.setupClient();
+		this.logger.info("Krystal ready.");
+		this.PluginManager.startConfiguredPlugins();
 	}
 
 	private async setupDb() {
 		await Mongoose.connect(this.config.db.url, { useNewUrlParser: true })
-			.catch(() => {
+			.catch((error) => {
+				this.logger.error(error);
 				process.exit(1);
 			});
 	}
 	private async setupClient() {
 		await this.client.login(this.config.bot.token)
-			.catch((err) => {
+			.catch((error) => {
+				this.logger.error(error);
 				process.exit(1);
 			});
 	}

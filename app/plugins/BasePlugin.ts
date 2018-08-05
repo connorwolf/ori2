@@ -1,20 +1,21 @@
 import { KrystalClient } from "../KrystalClient";
 
-export class IPluginOptions {
-    name: string;
+export interface IPluginOptions {
+	name: string;
+	path: string;
 }
 
 export class BasePlugin {
-    bot: KrystalClient;
-    options: IPluginOptions;
+	public bot: KrystalClient;
+	public options: IPluginOptions;
 
 	constructor(bot: KrystalClient, options: IPluginOptions) {
-        this.bot = bot;
-        this.options = options;
-    }
+		this.bot = bot;
+		this.options = options;
+	}
 
-	start() {}
+	public start() {}
 
-	unload() {}
-	stop() {}
+	public unload() {}
+	public stop() {}
 }

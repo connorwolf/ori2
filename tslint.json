@@ -7,7 +7,9 @@
     "rules": {
         "eofline": false,
         "no-var-requires": false,
-        "indent": [true, "tabs", 4]
+        "indent": [true, "tabs", 4],
+        "max-classes-per-file": false,
+        "no-empty": { "severity": "warn"}
     },
     "rulesDirectory": []
 }

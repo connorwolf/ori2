@@ -1,18 +1,17 @@
-import { BasePlugin, IPluginOptions } from "../BasePlugin";
 import { KrystalClient } from "../../KrystalClient";
+import { BasePlugin, IPluginOptions } from "../BasePlugin";
 
-class CorePlugin extends BasePlugin {
+class Plugin extends BasePlugin {
 	constructor(bot: KrystalClient, options: IPluginOptions) {
 		super(bot, options);
 		this.bot = bot;
+		this.options = {
+			name: "CorePlugin",
+			path: "CorePlugin",
+		};
 	}
-
-	start() {
-
-	}
-
-	registerCommands() {
+	public start() {
+		this.bot.logger.info("toast");
 	}
 }
-
-module.exports = CorePlugin;
+export default Plugin;

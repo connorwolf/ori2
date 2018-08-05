@@ -5,6 +5,13 @@ const format = printf(info => {
 	return `${info.timestamp} ${info.level} ${info.message}`;
 });
 
+winston.addColors({
+    error: 'red',
+    warn: 'yellow',
+    info: 'cyan',
+    debug: 'green'
+});
+
 var config = {
 	format: combine(
 		timestamp(),
@@ -12,7 +19,7 @@ var config = {
 	),
 	transports: [
 		new winston.transports.Console()
-	]
+    ],
 };
 
 module.exports = config;

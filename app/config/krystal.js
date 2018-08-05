@@ -1,11 +1,15 @@
 module.exports = {
 	defaults: {
-		prefix: "!"
+		prefix: "o!"
 	},
 	bot: {
-		token: "NDMwNDU2MDY4NzI4OTQ2NzA4.DjjUmQ.GXRlLZQqZPk_FBzmj72RMpUBVBE"
+        token: "NDI5NjMxNjI1ODQwNjg5MTUy.DkdIdQ.1DpzSVQlpla-ZIpjA8PByZZOkNs",
+        plugins: [
+            'CorePlugin',
+            'TestPlugin'
+        ]
 	},
 	db: {
-		url: "mongodb://ori2:ori2password@ds119651.mlab.com:19651/nexus2"
+        url: "mongodb://krystal:krystalbot1@ds263161.mlab.com:63161/krystal"
 	}
 };
