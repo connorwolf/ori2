@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import * as Mongoose from "mongoose";
 import * as Winston from "winston";
+import { EventHandler } from "./EventUtil";
 import { PluginManager } from "./plugins/PluginManager";
 
 export interface IKrystalClientOptions {
@@ -10,6 +11,7 @@ export interface IKrystalClientOptions {
 	bot: {
 		token: string,
 		plugins: string[],
+		events: string[],
 	};
 	db: {
 		url: string,
@@ -23,6 +25,7 @@ export class KrystalClient {
 	// public eventHandlers: Discord.Collection<string, EventHandler>;
 	public startedOn: number;
 	public PluginManager: PluginManager;
+	public EventHandler: EventHandler;
 	public config: IKrystalClientOptions;
 
 	constructor(config: IKrystalClientOptions) {
@@ -33,6 +36,7 @@ export class KrystalClient {
 		// this.eventHandlers = new Discord.Collection();
 		this.startedOn = Date.now();
 		this.PluginManager = new PluginManager(this);
+		this.EventHandler = new EventHandler(this);
 		this.logger.debug("KrystalClient initialised.");
 	}
 

@@ -6,7 +6,10 @@ module.exports = {
         token: "NDI5NjMxNjI1ODQwNjg5MTUy.DkdIdQ.1DpzSVQlpla-ZIpjA8PByZZOkNs",
         plugins: [
             'CorePlugin',
-            'TestPlugin'
+        ],
+        events: [
+            'error',
+            'info'
         ]
 	},
 	db: {

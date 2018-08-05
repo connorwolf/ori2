@@ -13,13 +13,12 @@ export class PluginHost {
 		this.plugin.start();
 		this.watch();
 	}
-
 	private watch() {
-		fs.watch(`${__dirname}/${this.plugin.options.path}`, {
+		fs.watch(`${__dirname}/${this.plugin.options.path || this.plugin.options.name}`, {
 			persistent: true,
 			recursive: true,
-		}, (eventType: string, filename: string) => {
-			if (eventType === "change") {
+		}, (eventType: string) => {
+			if (eventType === "change" && this.plugin.options.reloadable) {
 				if (this.timeout) { clearTimeout(this.timeout); }
 				this.timeout = setTimeout(() => {
 					this.bot.logger.info(`Changes to plugin "${this.plugin.options.name}", reloading...`);

@@ -1,4 +1,5 @@
 import { Collection } from "discord.js";
+import * as fs from "fs";
 import { KrystalClient } from "../KrystalClient";
 import { BasePlugin } from "./BasePlugin";
 import { PluginHost } from "./PluginHost";
@@ -21,12 +22,20 @@ export class PluginManager {
 	public async startConfiguredPlugins() {
 		this.bot.logger.info("Spawning configured plugins...");
 		this.bot.config.bot.plugins.map((path) => {
-			import(`./${path}`)
+			if (!fs.existsSync(`${__dirname}/${path}`)) {
+				return this.bot.logger.warn(`Plugin "${path}" could not be resolved.`);
+			} else {
+				import(`./${path}`)
 				.then((Plugin) => {
-					this.spawn(new Plugin.default(this.bot));
+					const plugin: BasePlugin = new Plugin.default(this.bot);
+					if (!plugin.options.reloadable) {
+						this.bot.logger.warn(`Plugin "${plugin.options.name}" is marked as "unreloadable".`);
+					}
+					this.spawn(plugin);
 				}, (err) => {
 					this.bot.logger.error(err);
 				});
+			}
 		});
 	}
 }

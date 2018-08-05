@@ -2,7 +2,8 @@ import { KrystalClient } from "../KrystalClient";
 
 export interface IPluginOptions {
 	name: string;
-	path: string;
+	path?: string;
+	reloadable: boolean;
 }
 
 export class BasePlugin {
